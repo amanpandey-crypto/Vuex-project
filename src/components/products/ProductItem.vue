@@ -7,7 +7,7 @@
       <div class="product__text">
         <h3>{{ title }}</h3>
         <base-badge mode="highlight" :no-margin-left="true">
-          <h4>${{ price }}</h4>
+          <h4>₹ {{ price }}</h4>
         </base-badge>
         <p>{{ description }}</p>
       </div>
@@ -20,15 +20,11 @@
 
 <script>
 export default {
-  inject: ['addProductToCart'],
   props: ['id', 'image', 'title', 'price', 'description'],
   methods: {
     addToCart() {
-      this.addProductToCart({
+      this.$store.dispatch('cart/addToCart', {
         id: this.id,
-        image: this.image,
-        title: this.title,
-        price: this.price,
       });
     },
   },
